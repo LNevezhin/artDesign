@@ -160,14 +160,13 @@
         <div class="project__menu">
           <nav class="project__menu__nav">
             <ul class="project__menu__list">
-              <li :id="'pr'+ index" class="project__menu__item"
-                v-for="(item, index) in apidata.sliderBlock[projIndex].types" :key="parseInt(index)"
-                @click="setProjectMenu(index)">
+              <li :id="'pr'+ index" class="project__menu__item" v-for="(item, index) in projectMenu[projIndex]"
+                :key="parseInt(index)" @click="setProjectMenu(index)">
                 <p class="project__menu__link">{{item}}</p>
                 <p class="project__submenu__link" v-for="(item, id) in projectSubMenu[position]" :key="parseInt(id)"
                   @click="setProjectMenuImage(index, id)" v-show="index == position">
                   {{apidata.sliderBlock[projIndex].titleLight}} -
-                  {{apidata.sliderBlock[projIndex].types[position]}} - {{id+1}}
+                  {{projectMenu[projIndex][position]}} - {{id+1}}
                 </p>
               </li>
             </ul>
@@ -258,7 +257,6 @@
         projectSubMenu: [],
         projIndex: 0,
         position: 0,
-        key: '',
         node: 0,
         sliderBlockImage: "https://raw.githubusercontent.com/obvu/frontend-testcase/master/files/Слайдер 2/Гостинная/гостиная.png",
         social: ["../assets/img/fb_icon.png", "../assets/img/insta_icon.png", "../assets/img/vk_icon.png"],
@@ -314,25 +312,24 @@
       },
 
       setProjectMenu: function (index) {
-        this.key = '';
+        let key = '';
         this.position = index;
         let projectSub = [];
 
         for (let i = 0; i < 3; i++) {
-          this.key = this.key + this.apidata.sliderBlock[this.projIndex].types[index][i].toLowerCase();
+          key = key + this.projectMenu[this.projIndex][this.position][i].toLowerCase();
         }
 
-        for (let i = 0; i < this.apidata.sliderBlock[this.projIndex].types.length; i++)
+        for (let i = 0; i < this.projectMenu[this.projIndex].length; i++)
           this.projectSubMenu[this.position] = 0;
 
         for (let i = 0; i < this.apidata.sliderBlock[this.projIndex].images.length; i++) {
-          if (this.apidata.sliderBlock[this.projIndex].images[i].toLowerCase().indexOf(this.key) != -1) {
+          if (this.apidata.sliderBlock[this.projIndex].images[i].toLowerCase().indexOf(key) != -1) {
 
             projectSub.push(i);
           }
         }
         this.projectSubMenu[this.position] = projectSub;
-        console.log('this.projectSubMenu: ', this.projectSubMenu);
 
       },
       setProjectMenuImage(index, id) {
