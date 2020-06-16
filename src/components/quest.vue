@@ -1,5 +1,8 @@
 <template>
   <div>
+
+    <!-- Header section -->
+
     <header class="header">
       <div class="wrapper">
         <div class="header__wrapper">
@@ -25,6 +28,10 @@
       </div>
     </header>
 
+    <!-- Header section end -->
+
+    <!-- Main start section start-->
+
     <main class="main">
       <div class="main__screen">
         <div class="upper__slider-arrows">
@@ -39,6 +46,9 @@
             </div>
           </a>
         </div>
+
+        <!--  Upper slider section start-->
+
         <div id="main-pic" class="main-pic">
           <input type="radio" name="point" class="main-pic-input" id="slide1" :checked="infoIndex == 0">
           <input type="radio" name="point" class="main-pic-input" id="slide2" :checked="infoIndex == 1">
@@ -47,8 +57,10 @@
             <div class="slides slide1"></div>
             <div class="slides slide2"></div>
           </div>
-          <!--           <img :src="apidata.baseApiFilesUrl + apidata.slidesInfo[0].image" alt=""> -->
         </div>
+
+        <!-- Upper slider section end -->
+
         <div class="main__circle">
           <nav class="main__nav__circles">
             <a href="#main-pic" class="main__nav__circle-link" v-for="(item, index) in apidata.slidesInfo"
@@ -104,6 +116,8 @@
           </div>
         </div>
       </section>
+
+      <!-- Projects section start -->
 
       <section class="projects">
         <div class="project__pic">
@@ -174,6 +188,13 @@
         </div>
       </section>
     </main>
+
+    <!-- Projects section end -->
+
+    <!-- Main section end -->
+
+    <!-- Footer section start -->
+
     <footer class="footer">
       <div class="wrapper">
         <div class="footer__wrapper">
@@ -240,6 +261,8 @@
       </div>
     </footer>
 
+    <!-- Footer section end -->
+
   </div>
 </template>
 
@@ -249,21 +272,13 @@
     name: "quest",
     data() {
       return {
-
-        infoBlock: [],
-        sliderBlock: [],
-        sliderBlockTitle: "",
-        sliderBlockSubTitle: "",
         projectMenu: [],
         projectSubMenu: [],
         projIndex: 0,
         position: 0,
         id: 0,
         infoIndex: 0,
-        sliderBlockImage: "https://raw.githubusercontent.com/obvu/frontend-testcase/master/files/Слайдер 2/Гостинная/гостиная.png",
-        social: ["../assets/img/fb_icon.png", "../assets/img/insta_icon.png", "../assets/img/vk_icon.png"],
         headerItems: ["Кухни", "Спальни", "Гостинные", "Ванные комнаты"],
-
         url: "https://raw.githubusercontent.com/obvu/frontend-testcase/master/apidata.json",
         apidata: {},
       }
@@ -273,12 +288,8 @@
         .get(this.url)
         .then(response => {
           this.apidata = response.data;
-          for (var i = 0; i < 3; i++) {
-            this.infoBlock[i] = this.apidata.infoBlock.blocks[i].icon;
-          }
-          for (i = 0; i < this.apidata.sliderBlock.length; i++) {
-            this.sliderBlock[i] = this.apidata.sliderBlock[i].icon;
-          }
+
+          /* Массив для меня выбора стилей в Project section (не выводим пункты для несуществующих картинок) - */
 
           for (let projIndex = 0; projIndex < this.apidata.sliderBlock.length; projIndex++) {
             this.projectMenu[projIndex] = [];
@@ -305,12 +316,6 @@
       setSliderBlock: function (index) {
         this.position = '';
         this.projIndex = index;
-        this.sliderBlockTitle = this.apidata.sliderBlock[index].titleLight + "   " + this.apidata.sliderBlock[index]
-          .titleBold;
-        this.sliderBlockSubTitle = this.apidata.sliderBlock[index].subTitle;
-        if (index == 1)
-          this.sliderBlockImage = this.apidata.baseApiFilesUrl + this.apidata.sliderBlock[index].images[2];
-        else this.sliderBlockImage = this.apidata.baseApiFilesUrl + this.apidata.sliderBlock[index].images[0]
       },
 
       setProjectMenu: function (index) {
@@ -337,8 +342,6 @@
       },
       setProjectMenuImage(index, id) {
         this.id = this.projectSubMenu[index][id];
-        /*         this.sliderBlockImage = this.apidata.baseApiFilesUrl + this.apidata.sliderBlock[this.projIndex].images[this
-                  .projectSubMenu[index][id]] */
       },
       setHeaderSliderBlock: function (index) {
         switch (index) {
@@ -559,8 +562,7 @@
 
   .main-pic {
     position: relative;
-    height: 645px;
-    /*     margin: 100px auto 0; */
+    height: 660px;
     width: 902px;
   }
 
@@ -576,6 +578,49 @@
     max-width: 100%;
     z-index: 5;
   }
+
+  /*Upper slider section*/
+
+  .main-pic-input {
+    display: none;
+  }
+
+  .slider {
+    height: inherit;
+    overflow: hidden;
+    position: relative;
+    width: inherit;
+    box-shadow: 0 0 20px rgba(0, 0, 0, .5);
+  }
+
+  .slides {
+    height: inherit;
+    opacity: 0;
+    position: absolute;
+    width: inherit;
+    z-index: 0;
+    transform: scale(1.5);
+    transition: transform ease-in-out .5s, opacity ease-in-out .5s;
+  }
+
+  .slide1 {
+    background-image: url("https://raw.githubusercontent.com/obvu/frontend-testcase/master/files/Слайдер/Гостиная1.png");
+  }
+
+  .slide2 {
+    background-image: url("https://raw.githubusercontent.com/obvu/frontend-testcase/master/files/Слайдер/гостинная лофт.jpg");
+  }
+
+  #slide1:checked~.slider>.slide1,
+  #slide2:checked~.slider>.slide2 {
+    opacity: 1;
+    z-index: 1;
+    transform: scale(1);
+  }
+
+  /* Upper slider section end*/
+
+  /* Main section*/
 
   .main__nav__circles {
     position: absolute;
@@ -667,6 +712,8 @@
   .benefits__card_icon {
     display: block;
   }
+
+  /* Project section */
 
   .project__pic {
     display: inline-block;
@@ -894,83 +941,5 @@
     opacity: 0.7;
     outline: none;
     cursor: pointer;
-  }
-
-  /*Slider section*/
-
-  .main-pic-input {
-    display: none;
-  }
-
-  .slider {
-    height: inherit;
-    overflow: hidden;
-    position: relative;
-    width: inherit;
-    box-shadow: 0 0 20px rgba(0, 0, 0, .5);
-  }
-
-  .slides {
-    height: inherit;
-    opacity: 0;
-    position: absolute;
-    width: inherit;
-    z-index: 0;
-    transform: scale(1.5);
-    transition: transform ease-in-out .5s, opacity ease-in-out .5s;
-  }
-
-  .slide1 {
-    background-image: url("https://raw.githubusercontent.com/obvu/frontend-testcase/master/files/Слайдер/Гостиная1.png");
-  }
-
-  .slide2 {
-    background-image: url("https://raw.githubusercontent.com/obvu/frontend-testcase/master/files/Слайдер/гостинная лофт.jpg");
-  }
-
-  #slide1:checked~.slider>.slide1,
-  #slide2:checked~.slider>.slide2 {
-    opacity: 1;
-    z-index: 1;
-    transform: scale(1);
-  }
-
-  .main-pic>input {
-    display: none;
-  }
-
-  .main-pic .controls {
-    left: 50%;
-    margin-left: -98px;
-    position: absolute;
-  }
-
-  .main-pic label {
-    cursor: pointer;
-    display: inline-block;
-    height: 8px;
-    margin: 25px 12px 0 16px;
-    position: relative;
-    width: 8px;
-    border-radius: 50%;
-    transition: background ease-in-out .5s;
-  }
-
-  .main-pic label:hover,
-  #slide1:checked~.controls label:nth-of-type(1),
-  #slide2:checked~.controls label:nth-of-type(2) {
-    background: #ddd;
-  }
-
-  .main-pic label:after {
-    border: 2px solid #ddd;
-    content: " ";
-    display: block;
-    height: 12px;
-    left: -4px;
-    position: absolute;
-    top: -4px;
-    width: 12px;
-    border-radius: 50%;
   }
 </style>
