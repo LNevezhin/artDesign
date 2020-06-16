@@ -4,9 +4,10 @@
       <div class="wrapper">
         <div class="header__wrapper">
           <div class="header__logo">
-            <a href="#0">
-              <img :src="apidata.baseApiFilesUrl + 'files/Логотип/Plum.svg'" alt="" class="header__logo-pic">
-            </a>
+            <p>
+              <img :src="apidata.baseApiFilesUrl + 'files/Логотип/Plum.svg'" alt="Дизайн студия Plumberry"
+                class="header__logo-pic">
+            </p>
           </div>
 
           <nav class="header__nav">
@@ -27,44 +28,47 @@
     <main class="main">
       <div class="main__screen">
         <div class="upper__slider-arrows">
-          <a href="" class="slider-arrows">
+          <a href="#main-pic" class="slider-arrows" @click="setNextSlidesInfo()">
             <div>
               <img src="../assets/img/left_arrow.svg" alt="">
             </div>
           </a>
-          <a href="" class="slider-arrows">
+          <a href="#main-pic" class="slider-arrows" @click="setNextSlidesInfo()">
             <div>
               <img src="../assets/img/right_arrow.svg" alt="">
             </div>
           </a>
         </div>
-        <div class="main-pic">
-          <img :src="apidata.baseApiFilesUrl + apidata.slidesInfo[0].image" alt="">
+        <div id="main-pic" class="main-pic">
+          <input type="radio" name="point" class="main-pic-input" id="slide1" :checked="infoIndex == 0">
+          <input type="radio" name="point" class="main-pic-input" id="slide2" :checked="infoIndex == 1">
+
+          <div class="slider">
+            <div class="slides slide1"></div>
+            <div class="slides slide2"></div>
+          </div>
+          <!--           <img :src="apidata.baseApiFilesUrl + apidata.slidesInfo[0].image" alt=""> -->
         </div>
         <div class="main__circle">
           <nav class="main__nav__circles">
-            <a href="#0" class="main__nav__circle-link">
-              <div class="main__nav__circle">
-              </div>
-            </a>
-            <a href="#0" class="main__circle__circle-link">
-              <div class="main__nav__circle">
-              </div>
-            </a>
-            <a href="#0" class="main__circle__circle-link">
-              <div class="main__nav__circle">
+            <a href="#main-pic" class="main__nav__circle-link" v-for="(item, index) in apidata.slidesInfo"
+              :key="parseInt(index)" @click="setNextSlidesInfo()">
+              <div class="main__nav__circle" :class="{'project__nav__circle-selected': infoIndex == index}">
               </div>
             </a>
           </nav>
           <div class="offer">
-            <h3>
-              Дизайн-проект БЕСПЛАТНО
-            </h3>
+            <p>
+              {{apidata.slidesInfo[infoIndex].text1}}
+            </p>
+            <p>
+              {{apidata.slidesInfo[infoIndex].text2}}
+            </p>
           </div>
           <div class="offer datails">
-            <h3>
-              При заказе всего комплекса мебели в нашей студии
-            </h3>
+            <p>
+              {{apidata.slidesInfo[infoIndex].text3}}
+            </p>
           </div>
 
         </div>
@@ -116,13 +120,14 @@
             </a>
           </div>
           <nav class="project__circles">
-            <div class="project__circle" v-for="(item, index) in apidata.sliderBlock" :key="parseInt(index)"
-              @click="setSliderBlock(index)" :class="{'project__circle-selected': projIndex == index}">
+            <a href="#project-pic" class="project__circle" v-for="(item, index) in apidata.sliderBlock"
+              :key="parseInt(index)" @click="setSliderBlock(index)"
+              :class="{'project__circle-selected': projIndex == index}">
               <div>
                 <img :src="apidata.baseApiFilesUrl + apidata.sliderBlock[index].icon" alt=""
                   class="project__circle-pic">
               </div>
-            </div>
+            </a>
           </nav>
 
           <nav class="project__nav__circles">
@@ -155,8 +160,8 @@
         <div class="project__menu">
           <nav class="project__menu__nav">
             <ul class="project__menu__list">
-              <li :id="'pr'+ index" class="project__menu__item" v-for="(item, index) in projectMenu[projIndex]"
-                :key="parseInt(index)" @click="setProjectMenu(index)">
+              <li class="project__menu__item" v-for="(item, index) in projectMenu[projIndex]" :key="parseInt(index)"
+                @click="setProjectMenu(index)">
                 <p class="project__menu__link">{{item}}</p>
                 <p class="project__submenu__link" v-for="(item, id) in projectSubMenu[position]" :key="parseInt(id)"
                   @click="setProjectMenuImage(index, id)" v-show="index == position">
@@ -254,6 +259,7 @@
         projIndex: 0,
         position: 0,
         id: 0,
+        infoIndex: 0,
         sliderBlockImage: "https://raw.githubusercontent.com/obvu/frontend-testcase/master/files/Слайдер 2/Гостинная/гостиная.png",
         social: ["../assets/img/fb_icon.png", "../assets/img/insta_icon.png", "../assets/img/vk_icon.png"],
         headerItems: ["Кухни", "Спальни", "Гостинные", "Ванные комнаты"],
@@ -356,7 +362,13 @@
       setNextProjectBlock: function () {
         if (this.projIndex == 3) this.projIndex = 0;
         else this.projIndex++;
+      },
+
+      setNextSlidesInfo: function () {
+        if (this.infoIndex == 1) this.infoIndex = 0;
+        else this.infoIndex++;
       }
+
     },
   };
 </script>
@@ -542,7 +554,14 @@
 
   .slider-arrows {
     position: relative;
-    z-index: 1;
+    z-index: 10;
+  }
+
+  .main-pic {
+    position: relative;
+    height: 645px;
+    /*     margin: 100px auto 0; */
+    width: 902px;
   }
 
   .main__circle {
@@ -555,6 +574,7 @@
     margin-top: 150px;
     margin-left: 763px;
     max-width: 100%;
+    z-index: 5;
   }
 
   .main__nav__circles {
@@ -876,10 +896,81 @@
     cursor: pointer;
   }
 
-  /* @media (max-width: 1366px) {
+  /*Slider section*/
 
-   body {
-      width: 20%;
-   }
-} */
+  .main-pic-input {
+    display: none;
+  }
+
+  .slider {
+    height: inherit;
+    overflow: hidden;
+    position: relative;
+    width: inherit;
+    box-shadow: 0 0 20px rgba(0, 0, 0, .5);
+  }
+
+  .slides {
+    height: inherit;
+    opacity: 0;
+    position: absolute;
+    width: inherit;
+    z-index: 0;
+    transform: scale(1.5);
+    transition: transform ease-in-out .5s, opacity ease-in-out .5s;
+  }
+
+  .slide1 {
+    background-image: url("https://raw.githubusercontent.com/obvu/frontend-testcase/master/files/Слайдер/Гостиная1.png");
+  }
+
+  .slide2 {
+    background-image: url("https://raw.githubusercontent.com/obvu/frontend-testcase/master/files/Слайдер/гостинная лофт.jpg");
+  }
+
+  #slide1:checked~.slider>.slide1,
+  #slide2:checked~.slider>.slide2 {
+    opacity: 1;
+    z-index: 1;
+    transform: scale(1);
+  }
+
+  .main-pic>input {
+    display: none;
+  }
+
+  .main-pic .controls {
+    left: 50%;
+    margin-left: -98px;
+    position: absolute;
+  }
+
+  .main-pic label {
+    cursor: pointer;
+    display: inline-block;
+    height: 8px;
+    margin: 25px 12px 0 16px;
+    position: relative;
+    width: 8px;
+    border-radius: 50%;
+    transition: background ease-in-out .5s;
+  }
+
+  .main-pic label:hover,
+  #slide1:checked~.controls label:nth-of-type(1),
+  #slide2:checked~.controls label:nth-of-type(2) {
+    background: #ddd;
+  }
+
+  .main-pic label:after {
+    border: 2px solid #ddd;
+    content: " ";
+    display: block;
+    height: 12px;
+    left: -4px;
+    position: absolute;
+    top: -4px;
+    width: 12px;
+    border-radius: 50%;
+  }
 </style>
