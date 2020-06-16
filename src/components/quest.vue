@@ -12,8 +12,8 @@
           <nav class="header__nav">
             <ul class="header__list">
               <li class="header__item" v-for="(item, index) in headerItems" :key="parseInt(index)"
-                @click="setSliderBlock(index)">
-                <p class="header__link">{{item}}</p>
+                @click="setHeaderSliderBlock(index)">
+                <a href="#project-pic" class="header__link">{{item}}</a>
               </li>
               <li class="header__item">
                 <button class="header__button">связаться с нами</button>
@@ -104,20 +104,20 @@
       <section class="projects">
         <div class="project__pic">
           <div class="project__slider-arrows">
-            <a href="" class="slider-arrows">
+            <a href="#project-pic" class="slider-arrows">
               <div>
-                <img src="../assets/img/left_arrow.svg" alt="">
+                <img src="../assets/img/left_arrow.svg" alt="" @click="setPreviousProjectBlock()">
               </div>
             </a>
-            <a href="" class="slider-arrows">
+            <a href="#project-pic" class=" slider-arrows">
               <div>
-                <img src="../assets/img/right_arrow.svg" alt="">
+                <img src="../assets/img/right_arrow.svg" alt="" @click="setNextProjectBlock()">
               </div>
             </a>
           </div>
           <nav class="project__circles">
             <div class="project__circle" v-for="(item, index) in apidata.sliderBlock" :key="parseInt(index)"
-              @click="setSliderBlock(index)">
+              @click="setSliderBlock(index)" :class="{'project__circle-selected': projIndex == index}">
               <div>
                 <img :src="apidata.baseApiFilesUrl + apidata.sliderBlock[index].icon" alt=""
                   class="project__circle-pic">
@@ -126,35 +126,30 @@
           </nav>
 
           <nav class="project__nav__circles">
-            <a href="#0" class="project__nav__circle-link">
-              <div class="project__nav__circle">
-              </div>
-            </a>
-            <a href="#0" class="project__nav__circle-link">
-              <div class="project__nav__circle">
-              </div>
-            </a>
-            <a href="#0" class="project__nav__circle-link">
-              <div class="project__nav__circle">
-              </div>
-            </a>
-            <a href="#0" class="project__nav__circle-link">
-              <div class="project__nav__circle">
+            <a href="#project-pic" class="project__nav__circle-link" v-for="(item, index) in apidata.sliderBlock"
+              :key="parseInt(index)" @click="setSliderBlock(index)">
+              <div class="project__nav__circle" :class="{'project__nav__circle-selected': projIndex == index}">
               </div>
             </a>
           </nav>
 
           <div class="project__wrapper">
             <div class="intro__title">
-              <h1>
-                {{sliderBlockTitle}}
-              </h1>
+              <p>
+                {{apidata.sliderBlock[projIndex].titleLight}}
+              </p>
+            </div>
+            <div class="intro__title">
+              <p>
+                {{apidata.sliderBlock[projIndex].titleBold}}
+              </p>
             </div>
             <div class="project__love">
-              <p>{{sliderBlockSubTitle}}</p>
+              <p>{{apidata.sliderBlock[projIndex].subTitle}}</p>
             </div>
           </div>
-          <img :src="sliderBlockImage" alt="" class="project-pic">
+          <img id="project-pic" :src="apidata.baseApiFilesUrl + apidata.sliderBlock[projIndex].images[id]" alt=""
+            class="project-pic">
         </div>
 
         <div class="project__menu">
@@ -180,7 +175,7 @@
           <nav class="footer__menu__nav">
             <ul>
               <li v-for="(item, index) in headerItems" :key="parseInt(index)">
-                <p class="footer__menu__link" @click="setSliderBlock(index)">{{item}}</p>
+                <a href="#project-pic" class="footer__menu__link" @click="setHeaderSliderBlock(index)">{{item}}</a>
               </li>
             </ul>
           </nav>
@@ -249,6 +244,7 @@
     name: "quest",
     data() {
       return {
+
         infoBlock: [],
         sliderBlock: [],
         sliderBlockTitle: "",
@@ -257,12 +253,11 @@
         projectSubMenu: [],
         projIndex: 0,
         position: 0,
-        node: 0,
+        id: 0,
         sliderBlockImage: "https://raw.githubusercontent.com/obvu/frontend-testcase/master/files/Слайдер 2/Гостинная/гостиная.png",
         social: ["../assets/img/fb_icon.png", "../assets/img/insta_icon.png", "../assets/img/vk_icon.png"],
         headerItems: ["Кухни", "Спальни", "Гостинные", "Ванные комнаты"],
 
-        prefix: "https://raw.githubusercontent.com/obvu/frontend-testcase/master/",
         url: "https://raw.githubusercontent.com/obvu/frontend-testcase/master/apidata.json",
         apidata: {},
       }
@@ -302,6 +297,7 @@
     },
     methods: {
       setSliderBlock: function (index) {
+        this.position = '';
         this.projIndex = index;
         this.sliderBlockTitle = this.apidata.sliderBlock[index].titleLight + "   " + this.apidata.sliderBlock[index]
           .titleBold;
@@ -312,6 +308,7 @@
       },
 
       setProjectMenu: function (index) {
+        this.position = '';
         let key = '';
         this.position = index;
         let projectSub = [];
@@ -333,9 +330,32 @@
 
       },
       setProjectMenuImage(index, id) {
-        this.sliderBlockImage = this.apidata.baseApiFilesUrl + this.apidata.sliderBlock[this.projIndex].images[this
-          .projectSubMenu[index][id]]
-
+        this.id = this.projectSubMenu[index][id];
+        /*         this.sliderBlockImage = this.apidata.baseApiFilesUrl + this.apidata.sliderBlock[this.projIndex].images[this
+                  .projectSubMenu[index][id]] */
+      },
+      setHeaderSliderBlock: function (index) {
+        switch (index) {
+          case 0:
+            this.projIndex = 1;
+            break;
+          case 1:
+            this.projIndex = 2;
+            break;
+          case 2:
+            this.projIndex = 0;
+            break;
+          case 3:
+            this.projIndex = 3;
+        }
+      },
+      setPreviousProjectBlock: function () {
+        if (this.projIndex == 0) this.projIndex = 3;
+        else this.projIndex--;
+      },
+      setNextProjectBlock: function () {
+        if (this.projIndex == 3) this.projIndex = 0;
+        else this.projIndex++;
       }
     },
   };
@@ -430,7 +450,7 @@
   /*Header section*/
 
   #app {
-    position: absolute;
+    position: relative;
     width: 1366px;
     margin: 0 auto;
   }
@@ -555,6 +575,7 @@
     border: 1px solid white;
   }
 
+  .project__nav__circle-selected,
   .main__nav__circle:focus,
   .main__nav__circle:hover,
   .main__nav__circle:active,
@@ -658,6 +679,7 @@
     text-align: center;
   }
 
+  .project__circle-selected,
   .project__circle:focus,
   .project__circle:hover,
   .project__circle:active {
