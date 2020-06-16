@@ -254,6 +254,7 @@
         sliderBlock: [],
         sliderBlockTitle: "",
         sliderBlockSubTitle: "",
+        projectMenu: [],
         projectSubMenu: [],
         projIndex: 0,
         position: 0,
@@ -279,6 +280,23 @@
           for (i = 0; i < this.apidata.sliderBlock.length; i++) {
             this.sliderBlock[i] = this.apidata.sliderBlock[i].icon;
           }
+
+          for (let projIndex = 0; projIndex < this.apidata.sliderBlock.length; projIndex++) {
+            this.projectMenu[projIndex] = [];
+
+            for (let position = 0; position < this.apidata.sliderBlock[projIndex].types.length; position++) {
+              let key = '';
+              for (let i = 0; i < 3; i++) {
+                key = key + this.apidata.sliderBlock[projIndex].types[position][i].toLowerCase();
+              }
+              for (let i = 0; i < this.apidata.sliderBlock[projIndex].images.length; i++) {
+                if (this.apidata.sliderBlock[projIndex].images[i].toLowerCase().indexOf(key) != -1) {
+                  this.projectMenu[projIndex].push(this.apidata.sliderBlock[projIndex].types[position]);
+                }
+              }
+            }
+          }
+          console.log('projectMenu: ', this.projectMenu);
         })
         .catch(error => {
           console.log("error", error);
