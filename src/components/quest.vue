@@ -3,7 +3,7 @@
 
     <!-- Header section -->
 
-    <header class="header">
+    <header class="header" >
       <div class="wrapper">
         <div class="header__wrapper">
           <div class="header__logo">
@@ -32,7 +32,7 @@
 
     <!-- Main start section start-->
 
-    <main class="main">
+    <main class="main" v-if="apidata && apidata.length !=0 ? apidata : ''">
       <div class="main__screen">
         <div class="upper__slider-arrows">
           <a href="#main-pic" class="slider-arrows" @click="setNextSlidesInfo()">
@@ -70,7 +70,7 @@
             </a>
           </nav>
           <div class="offer">
-            <p>
+            <p >
               {{apidata.slidesInfo[infoIndex].text1}}
             </p>
             <p>
@@ -160,14 +160,14 @@
             </div>
             <div class="intro__title">
               <p>
-                {{apidata.sliderBlock[projIndex].titleBold}}
+                {{ apidata.sliderBlock[projIndex].titleBold}}
               </p>
             </div>
             <div class="project__love">
-              <p>{{apidata.sliderBlock[projIndex].subTitle}}</p>
+              <p>{{ apidata.sliderBlock[projIndex].subTitle}}</p>
             </div>
           </div>
-          <img id="project-pic" :src="apidata.baseApiFilesUrl + apidata.sliderBlock[projIndex].images[id]" alt=""
+          <img id="project-pic" :src=" apidata.baseApiFilesUrl + apidata.sliderBlock[projIndex].images[id]" alt=""
             class="project-pic">
         </div>
 
@@ -272,6 +272,7 @@
     name: "quest",
     data() {
       return {
+        apidata: [],
         projectMenu: [],
         projectSubMenu: [],
         projIndex: 0,
@@ -280,7 +281,7 @@
         infoIndex: 0,
         headerItems: ["Кухни", "Спальни", "Гостинные", "Ванные комнаты"],
         url: "https://raw.githubusercontent.com/obvu/frontend-testcase/master/apidata.json",
-        apidata: {},
+
       }
     },
     created() {
@@ -288,6 +289,7 @@
         .get(this.url)
         .then(response => {
           this.apidata = response.data;
+        console.log('this.apidata: ', this.apidata);
 
           /* Массив для меня выбора стилей в Project section (не выводим пункты для несуществующих картинок) - */
 
@@ -306,7 +308,6 @@
               }
             }
           }
-          console.log('projectMenu: ', this.projectMenu);
         })
         .catch(error => {
           console.log("error", error);
@@ -341,9 +342,11 @@
 
       },
       setProjectMenuImage(index, id) {
+        this.position = '';
         this.id = this.projectSubMenu[index][id];
       },
       setHeaderSliderBlock: function (index) {
+        this.position = '';
         switch (index) {
           case 0:
             this.projIndex = 1;
@@ -359,10 +362,12 @@
         }
       },
       setPreviousProjectBlock: function () {
+        this.position = '';
         if (this.projIndex == 0) this.projIndex = 3;
         else this.projIndex--;
       },
       setNextProjectBlock: function () {
+        this.position = '';
         if (this.projIndex == 3) this.projIndex = 0;
         else this.projIndex++;
       },
