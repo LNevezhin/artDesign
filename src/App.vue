@@ -1,16 +1,16 @@
 <template>
-  <div id="app">
-    <quest></quest>
-  </div>
+   <div id="app">
+      <artdesign></artdesign>
+   </div>
 </template>
 
 <script>
-import quest from './components/quest.vue'
+   import artdesign from "./components/artdesign.vue";
 
-export default {
-  name: 'App',
-  components: {
-    quest
-  }
-}
+   export default {
+      name: "App",
+      components: {
+         artdesign
+      }
+   };
 </script>

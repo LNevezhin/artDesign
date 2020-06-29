@@ -1,113 +1,114 @@
 {
-   "baseApiFilesUrl": "https://raw.githubusercontent.com/obvu/frontend-testcase/master/",
-   "slidesInfo": [{
-         "image": "files/Слайдер/Гостиная1.png",
-         "text1": "Доставим",
-         "text2": "Бесплатно",
-         "text3": "При заказе всего комплекса мебели в нашей студии"
+  "baseApiFilesUrl": "http://artdesign-7f1b3.appspot.com/",
+  "logo": "files/icons/logo/Plum.svg",
+  "arrows": {
+    "left": "files/icons/slider1/left_arrow.png",
+    "right": "files/icons/slider1/right_arrow.png"
+  },
+  "socialIcons": {
+    "facebook": "files/icons/social/fb_icon.png",
+    "instagram": "files/icons/social/insta_icon.png",
+    "vkontakte": "files/icons/social/vk_icon.png"
+  },
+  "slidesInfo": [{
+      "image": "files/slider1/0.png",
+      "text1": "Доставим",
+      "text2": "Бесплатно",
+      "text3": "При заказе всего комплекса мебели в нашей студии"
+    },
+    {
+      "image": "files/slider1/1.png",
+      "text1": "Соберем",
+      "text2": "Со скидкой",
+      "text3": "При звонке прямо сейчас"
+    }
+  ],
+  "infoBlock": {
+    "titleLight": "Дизайн студия",
+    "titleBold": "ArtDesign",
+    "subTitle": "Деятельности «Plumberry» — проектирование и дизайн интерьера. Дизайнеры и архитекторы компании помогут создать уникальный интерьер, отвечающий Вашим стилистическим пристрастиям, а также всем требованиям современных тенденций и эргономики. Мы также занимаемся разработкой и производством индивидуальной мебели для кухонь, гостиных, спален и т.п.",
+    "blocks": [{
+        "icon": "files/icons/infoBlock/key.svg",
+        "text": "Возможность реализовать интерьер «под ключ» — от проекта до декора"
       },
       {
-         "image": "files/Слайдер/гостинная лофт.jpg",
-         "text1": "Соберем",
-         "text2": "Со скидкой",
-         "text3": "При звонке прямо сейчас"
+        "icon": "files/icons/infoBlock/tree.svg",
+        "text": "Использование только современных, экологически безопасных и лицензированных материалов"
+      },
+      {
+        "icon": "files/icons/infoBlock/search.svg",
+        "text": "Постоянный мониторинг современных тенденций дизайна и промышленных технологий"
       }
-   ],
-   "infoBlock": {
-      "titleLight": "Дизайн студия",
-      "titleBold": "Plumberry",
-      "blocks": [{
-            "icon": "files/Иконки/key.svg",
-            "text": "Возможность реализовать интерьер мечты  «под ключ» — от проекта до декора"
-         },
-         {
-            "icon": "files/Иконки/tree.svg",
-            "text": "Использование только современных, экологически безопасных и лицензированных материалов"
-         },
-         {
-            "icon": "files/Иконки/search.svg",
-            "text": "Постоянный мониторинг современных тенденций дизайна и промышленных технологий"
-         }
+    ]
+  },
+  "sliderBlock": [{
+      "baseFilesUrl": "files/slider2/Гостинная/",
+      "icon": "files/icons/slider2/dining.svg",
+      "titleLight": "Гостинные",
+      "titleBold": "ArtDesign",
+      "subTitle": "Проекты, выполенные нами с любовью",
+      "imageCount": [11, 8, 11, 9, 5, 13, 11],
+      "types": [
+        "Авангард",
+        "Барокко",
+        "Лофт",
+        "Минимализм",
+        "Модерн",
+        "Хай-тек",
+        "Эко-стиль"
       ]
-   },
-   "sliderBlock": [{
-         "icon": "files/Слайдер 2/Иконки слайдер/dining.svg",
-         "titleLight": "Гостинные",
-         "titleBold": "Plumberry",
-         "subTitle": "Проекты, выполенные нами с любовью",
-         "images": [
-            "files/Слайдер 2/Гостинная/гостиная.png",
-            "files/Слайдер 2/Гостинная/гостинная авангард.jpg",
-            "files/Слайдер 2/Гостинная/Гостинная минимализм.jpg",
-            "files/Слайдер 2/Гостинная/Гостинная Хай Тек.jpg"
-         ],
-         "types": [
-            "Модерн",
-            "Барокко",
-            "Минимализм",
-            "Хай-тек",
-            "Авангард",
-            "Лофт",
-            "Экологичный стиль"
-         ]
-      },
-      {
-         "icon": "files/Слайдер 2/Иконки слайдер/kitchen.svg",
-         "titleLight": "Кухня",
-         "titleBold": "Plumberry",
-         "subTitle": "Проекты, выполенные нами с любовью",
-         "images": [
-            "files/Слайдер 2/Кухня/кухня лофт.jpg",
-            "files/Слайдер 2/Кухня/кухня марроканский стиль.jpg",
-            "files/Слайдер 2/Кухня/Кухня модерн.jpg"
-         ],
-         "types": [
-            "Марроканский стиль",
-            "Неоклассика",
-            "Винтаж",
-            "Арт-нуво",
-            "Арт-деко",
-            "Лофт",
-            "Экологичный стиль"
-         ]
-      },
-      {
-         "icon": "files/Слайдер 2/Иконки слайдер/bedroom.svg",
-         "titleLight": "Спальня",
-         "titleBold": "Plumberry",
-         "subTitle": "Проекты, выполенные нами с любовью",
-         "images": [
-            "files/Слайдер 2/Спальня/спальня кантри.jpg",
-            "files/Слайдер 2/Спальня/спальня лофт.jpg",
-            "files/Слайдер 2/Спальня/спальня эко стиль.jpg"
-         ],
-         "types": [
-            "Бохо",
-            "Лаунж",
-            "Кантри",
-            "Хай-тек",
-            "Лофт",
-            "Экологичный стиль"
-         ]
-      },
-      {
-         "icon": "files/Слайдер 2/Иконки слайдер/bathroom.svg",
-         "titleLight": "Ванна",
-         "titleBold": "Plumberry",
-         "subTitle": "Проекты, выполенные нами с любовью",
-         "images": [
-            "files/Слайдер 2/Ванная комната/ванна винтаж.jpg",
-            "files/Слайдер 2/Ванная комната/ванна минимализм.jpg",
-            "files/Слайдер 2/Ванная комната/ванна хай тек.jpg"
-         ],
-         "types": [
-            "Винтаж",
-            "Хай-тек",
-            "Лофт",
-            "Минимализм",
-            "Функционализм",
-            "Футуризм"
-         ]
-      }
-   ]
+    },
+    {
+      "baseFilesUrl": "files/slider2/Кухня/",
+      "icon": "files/icons/slider2/kitchen.svg",
+      "titleLight": "Кухня",
+      "titleBold": "ArtDesign",
+      "subTitle": "Проекты, выполенные нами с любовью",
+      "imageCount": [8, 4, 7, 9, 10, 10, 12, 9],
+      "types": [
+        "Арт-деко",
+        "Арт-нуво",
+        "Винтаж",
+        "Лофт",
+        "Марроканский стиль",
+        "Неоклассика",
+        "Хай-тек",
+        "Эко-стиль"
+      ]
+    },
+    {
+      "baseFilesUrl": "files/slider2/Спальня/",
+      "icon": "files/icons/slider2/bedroom.svg",
+      "titleLight": "Спальня",
+      "titleBold": "ArtDesign",
+      "subTitle": "Проекты, выполенные нами с любовью",
+      "imageCount": [11, 7, 10, 8, 12, 10, 6],
+      "types": [
+        "Барокко",
+        "Бохо",
+        "Кантри",
+        "Лаунж",
+        "Лофт",
+        "Хай-тек",
+        "Эко-стиль"
+      ]
+    },
+    {
+      "baseFilesUrl": "files/slider2/Ванная/",
+      "icon": "files/icons/slider2/bathroom.svg",
+      "titleLight": "Ванная",
+      "titleBold": "ArtDesign",
+      "subTitle": "Проекты, выполенные нами с любовью",
+      "imageCount": [7, 7, 9, 11, 6, 10, 10],
+      "types": [
+        "Барокко",
+        "Винтаж",
+        "Лофт",
+        "Минимализм",
+        "Функционализм",
+        "Футуризм",
+        "Хай-тек"
+      ]
+    }
+  ]
 }
